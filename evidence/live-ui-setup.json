@@ -1,0 +1,88 @@
+{
+  "recordedAtUtc": "2026-10-19T18:18:01.319723+00:00",
+  "method": "Normal HubSpot UI operated by Codex in its own DOM-only tabs",
+  "authorship": "Agent performed these operations using Riley\u2019s signed-in session. HubSpot UI audit labels identifying the signed-in user are not evidence of Riley personally performing the actions.",
+  "portalId": 149590534,
+  "portalType": "Developer test account",
+  "privateAppId": 57763541,
+  "customObject": {
+    "name": "practicum_trail_kits",
+    "label": "Trail Kit",
+    "pluralLabel": "Trail Kits",
+    "objectTypeId": "2-255182120",
+    "primaryDisplayProperty": "name",
+    "nameUnique": true,
+    "properties": [
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "string"
+      },
+      {
+        "name": "category",
+        "label": "Category",
+        "type": "string"
+      },
+      {
+        "name": "capacity",
+        "label": "Capacity",
+        "type": "number"
+      }
+    ],
+    "url": "https://app-eu1.hubspot.com/contacts/149590534/objects/2-255182120/views/all/list"
+  },
+  "records": [
+    {
+      "properties": {
+        "name": "Practice Kit A",
+        "category": "Hiking",
+        "capacity": "12"
+      },
+      "recordId": "458325726441",
+      "recordUrl": "https://app-eu1.hubspot.com/contacts/149590534/record/2-255182120/458325726441",
+      "associatedContact": {
+        "name": "Synthetic Participant One",
+        "email": "riley-practicum-001@example.com",
+        "recordId": "895946288343",
+        "url": "https://app-eu1.hubspot.com/contacts/149590534/record/0-1/895946288343"
+      },
+      "associationVerifiedInUi": true
+    },
+    {
+      "properties": {
+        "name": "Practice Kit B",
+        "category": "Cycling",
+        "capacity": "8"
+      },
+      "recordId": "458327166197",
+      "recordUrl": "https://app-eu1.hubspot.com/contacts/149590534/record/2-255182120/458327166197",
+      "associatedContact": {
+        "name": "Synthetic Participant Two",
+        "email": "riley-practicum-002@example.com",
+        "recordId": "895946288350",
+        "url": "https://app-eu1.hubspot.com/contacts/149590534/record/0-1/895946288350"
+      },
+      "associationVerifiedInUi": true
+    },
+    {
+      "properties": {
+        "name": "Practice Kit C",
+        "category": "Camping",
+        "capacity": "20"
+      },
+      "recordId": "458326446291",
+      "recordUrl": "https://app-eu1.hubspot.com/contacts/149590534/record/2-255182120/458326446291",
+      "associatedContact": {
+        "name": "Synthetic Participant Three",
+        "email": "riley-practicum-003@example.com",
+        "recordId": "896027948245",
+        "url": "https://app-eu1.hubspot.com/contacts/149590534/record/0-1/896027948245"
+      },
+      "associationVerifiedInUi": true
+    }
+  ],
+  "apiVerification": "Pending; no API calls made because the token has not been captured.",
+  "tokenValueCaptured": false,
+  "marketingEnrollmentPerformed": false,
+  "productionChangesPerformed": false
+}
