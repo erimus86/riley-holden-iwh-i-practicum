@@ -17,12 +17,12 @@ The original starter and its history come from [HubSpot Academy](https://github.
 
 The link above uses the object ID observed in the test portal. The environment example already contains that verified ID.
 
-## Run locally after the token handoff
+## Run locally
 
 Requires Node.js 20 or later.
 
 1. Run `npm ci --ignore-scripts`.
-2. Copy `.env.example` to `.env`. The approved test app token has been stored there locally; do not paste it into chat or commit it. A fresh checkout must obtain its own authorized local token configuration.
+2. Use the existing local `.env`, which already contains the approved test app token. In a fresh checkout, create `.env` from `.env.example` and supply its authorized token locally. Never paste a token into chat or commit it.
 3. Run `npm run setup:plan` to inspect the schema and fictional fixtures. This makes no API calls.
 4. Run `npm run setup:apply` to verify the token's portal, app, and exact scopes, then create or reuse the practicum schema and fixtures. It records successful steps in `evidence/setup-state.json` and fills the object ID in `.env`. Existing fixtures are reused by name/email; existing associations are written idempotently.
 5. Run `npm run verify:api` for a read-only API comparison with the recorded UI fixtures.
