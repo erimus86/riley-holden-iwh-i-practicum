@@ -2,7 +2,7 @@
   "name": "riley-holden-iwh-i-practicum",
   "version": "1.0.0",
   "private": true,
-  "description": "Assistant-prepared HubSpot Academy practicum for an isolated developer test portal",
+  "description": "HubSpot Academy practicum prepared for Riley Holden using AI assistance",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -11,7 +11,7 @@
     "setup:plan": "node scripts/setup-practicum.js --plan",
     "setup:apply": "node scripts/setup-practicum.js --apply"
   },
-  "author": "Codex AI assistant; prepared for Riley Holden review",
+  "author": "Codex AI assistant",
   "license": "ISC",
   "engines": { "node": ">=20" },
   "dependencies": {

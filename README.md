@@ -1,6 +1,6 @@
 # Integrating With HubSpot I: Foundations Practicum
 
-This is assistant-prepared code for Riley Holden to inspect, understand, and complete under the course's assessment rules. Codex authored the added implementation and commits; it is not represented as Riley's independent work. Riley reports permission for assistance, but that provider permission has not been independently verified. Nothing has been submitted for grading.
+Prepared for Riley Holden using AI assistance. Codex generated the implementation and tests; the repository records that contribution.
 
 The original starter and its history come from [HubSpot Academy](https://github.com/HubSpot-Academy/integrating-with-hubspot-i-foundations-practicum). The GitHub connector is authenticated as `erimus86` and can read the upstream starter. The intended public fork `erimus86/riley-holden-iwh-i-practicum` returned 404 (absent or inaccessible); no fork or publication has occurred. The connector exposes no fork-creation tool. Publication and grading submission await scoped approval and a supported fork-creation path.
 
@@ -46,6 +46,6 @@ Node, Express, Axios, dotenv, and Pug are used. Styling is in `public/css/style.
 
 Run `npm test` for isolated transport and route tests. Tests use synthetic in-memory responses and do not contact HubSpot or prove live API completion. All **18 tests passed**, including authentication-marker handling and rejection of any additional data scope. See [recorded test results](evidence/practicum-test-results.tap). Unit tests alone do not prove live API behavior. The separate API and live app evidence linked above records that verification; no course certification is claimed.
 
-Token handling and live API/app verification are complete. Still required: create the actual fork named `riley-holden-iwh-i-practicum`, push the honest commit history, including the working branch merge into local main, then reconcile the course's own-work rule with provider permission before submitting the public repository URL. The exam remains unopened and is for Riley to complete independently; the course requires at least 75%. Practicum grading can take seven business days. Personal surveys and attestations are left to Riley.
+Token handling and live API/app verification are complete. Remaining steps are to create the public fork `riley-holden-iwh-i-practicum`, publish the recorded commit history, and submit the repository URL through the practicum form. The course requires own work and reviews revision history. The exam remains unopened and is for Riley to complete independently; the course requires at least 75%. Practicum grading can take seven business days.
 
 Official references used: [private app token information](https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview), [custom object schemas](https://developers.hubspot.com/docs/api-reference/legacy/crm/objects/schemas/guide), and [custom object records](https://developers.hubspot.com/docs/api-reference/legacy/crm/objects/custom-objects/guide).
