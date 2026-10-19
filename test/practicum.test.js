@@ -54,6 +54,21 @@ test('reads all pages with the three required properties', async () => {
   assert.equal(calls.at(-1).params.after, '101');
 });
 
+test('accepts the platform oauth authentication marker with exactly the six data permissions', async () => {
+  const { client } = clientWith(() => ({ results: [] }), { ...tokenInfo, scopes: [...SCOPES, 'oauth'] });
+  const account = await client.verifyAccount();
+  assert.deepEqual(account.scopes, [...SCOPES].sort());
+  assert.deepEqual(account.platformAuthenticationScopes, ['oauth']);
+  assert.deepEqual(await client.listSchemas(), []);
+});
+
+test('the oauth marker does not permit an additional data scope', async () => {
+  const { client, calls } = clientWith(() => assert.fail('CRM request must not execute'),
+    { ...tokenInfo, scopes: [...SCOPES, 'oauth', 'crm.objects.deals.write'] });
+  await assert.rejects(client.listSchemas(), /six approved/);
+  assert.equal(calls.length, 1);
+});
+
 test('stops repeated pagination cursors instead of looping', async () => {
   const { client } = clientWith(request => request.url.includes('/schemas/') ? schema
     : { results: [], paging: { next: { after: 'same' } } });

@@ -1,0 +1,65 @@
+{
+  "recordedAtUtc": "2026-10-19T18:28:05.347Z",
+  "method": "Read-only HubSpot CRM API verification; token introspection POST only",
+  "account": {
+    "hubId": 149590534,
+    "appId": 57763541,
+    "scopes": [
+      "crm.objects.contacts.read",
+      "crm.objects.contacts.write",
+      "crm.objects.custom.read",
+      "crm.objects.custom.write",
+      "crm.schemas.custom.read",
+      "crm.schemas.custom.write"
+    ],
+    "platformAuthenticationScopes": [
+      "oauth"
+    ]
+  },
+  "objectTypeId": "2-255182120",
+  "objectName": "practicum_trail_kits",
+  "objectUrl": "https://app.hubspot.com/contacts/149590534/objects/2-255182120/views/all/list",
+  "customPropertiesVerified": [
+    "name",
+    "category",
+    "capacity"
+  ],
+  "records": [
+    {
+      "recordId": "458325726441",
+      "properties": {
+        "name": "Practice Kit A",
+        "category": "Hiking",
+        "capacity": "12"
+      },
+      "contactId": "895946288343",
+      "fictionalEmail": "riley-practicum-001@example.com",
+      "associationVerified": true
+    },
+    {
+      "recordId": "458327166197",
+      "properties": {
+        "name": "Practice Kit B",
+        "category": "Cycling",
+        "capacity": "8"
+      },
+      "contactId": "895946288350",
+      "fictionalEmail": "riley-practicum-002@example.com",
+      "associationVerified": true
+    },
+    {
+      "recordId": "458326446291",
+      "properties": {
+        "name": "Practice Kit C",
+        "category": "Camping",
+        "capacity": "20"
+      },
+      "contactId": "896027948245",
+      "fictionalEmail": "riley-practicum-003@example.com",
+      "associationVerified": true
+    }
+  ],
+  "verifiedKitCount": 3,
+  "crmWritesPerformed": false,
+  "tokenValueRecorded": false
+}
