@@ -4,3 +4,5 @@
 secrets/
 node_modules/
 .DS_Store
+
+evidence/token-scope-inspection.json

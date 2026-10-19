@@ -1,0 +1,37 @@
+{
+  "recordedAtUtc": "2026-10-19T18:30:54.831548+00:00",
+  "method": "Normal browser actions through the actual Express/Pug app with live HubSpot API access",
+  "portalId": 149590534,
+  "appId": 57763541,
+  "objectTypeId": "2-255182120",
+  "homepage": {
+    "route": "GET /",
+    "observed": "Three original kits loaded from the live test API with Name, Category, and Capacity"
+  },
+  "form": {
+    "route": "GET /update-cobj",
+    "titleObserved": "Update Custom Object Form | Integrating With HubSpot I Practicum",
+    "fieldsObserved": [
+      "Name",
+      "Category",
+      "Capacity"
+    ]
+  },
+  "submission": {
+    "route": "POST /update-cobj",
+    "properties": {
+      "name": "Practice Kit D - API Form Check",
+      "category": "Walking",
+      "capacity": "6"
+    },
+    "observedRedirectTarget": "/",
+    "resultingTableCount": 4,
+    "persistedInHubSpotAfterRefresh": true,
+    "createdRecordId": "458418609367",
+    "recordUrl": "https://app-eu1.hubspot.com/contacts/149590534/record/2-255182120/458418609367"
+  },
+  "crmWritesPerformed": "One additional fictional Trail Kit creation via the required POST route; existing kits, contacts and associations unchanged",
+  "localServer": "Stopped after verification; bound only to 127.0.0.1:4388 while running",
+  "tokenValueRecorded": false,
+  "productionAccess": false
+}
