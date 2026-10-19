@@ -1,71 +1,88 @@
+'use strict';
+
+require('dotenv').config({ quiet: true });
+const path = require('node:path');
 const express = require('express');
-const axios = require('axios');
-const app = express();
+const { HubSpotClient, safeError } = require('./lib/hubspot');
+const { TEST_PORTAL_ID } = require('./config');
 
-app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+function validateKit(body) {
+  const name = typeof body.name === 'string' ? body.name.trim() : '';
+  const category = typeof body.category === 'string' ? body.category.trim() : '';
+  const capacity = typeof body.capacity === 'string' ? body.capacity.trim() : '';
+  if (!name || name.length > 120 || !category || category.length > 60 ||
+      !/^\d{1,3}$/.test(capacity) || Number(capacity) < 1 || Number(capacity) > 100) {
+    return { error: 'Enter a name (up to 120 characters), a category (up to 60 characters), and a whole-number capacity from 1 to 100.' };
+  }
+  return { properties: { name, category, capacity: String(Number(capacity)) } };
+}
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+function createApp({ hubspot }) {
+  const app = express();
+  app.disable('x-powered-by');
+  app.set('view engine', 'pug');
+  app.set('views', path.join(__dirname, 'views'));
+  app.locals.portalId = TEST_PORTAL_ID;
+  app.use((req, res, next) => {
+    res.set({
+      'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff',
+      'Content-Security-Policy': "default-src 'self'; script-src 'none'; style-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'"
+    });
+    next();
+  });
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.urlencoded({ extended: false, limit: '4kb', parameterLimit: 10 }));
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
+  // Route 1: retrieve all pages of the custom object's three user-defined properties.
+  app.get('/', async (req, res) => {
     try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
+      const data = await hubspot.listKits();
+      res.render('homepage', { title: 'Trail Kits | Integrating With HubSpot I Practicum', data });
     } catch (error) {
-        console.error(error);
+      res.status(502).render('error', { title: 'Unable to load Trail Kits', message: safeError(error) });
     }
-});
+  });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
+  // Route 2: display the form specified by the course.
+  app.get('/update-cobj', (req, res) => {
+    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum', values: {}, error: null });
+  });
+
+  // Route 3: validate, create one custom-object record, then return to the table.
+  app.post('/update-cobj', async (req, res) => {
+    if (req.get('origin') && req.get('origin') !== `${req.protocol}://${req.get('host')}`) {
+      return res.status(403).render('error', { title: 'Request rejected', message: 'Please submit the form from this app.' });
     }
-
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
+    const result = validateKit(req.body);
+    const form = { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum', values: req.body };
+    if (result.error) return res.status(400).render('updates', { ...form, error: result.error });
+    try {
+      await hubspot.createKit(result.properties);
+      res.redirect(303, '/');
+    } catch (error) {
+      res.status(502).render('updates', { ...form, error: safeError(error) });
     }
+  });
 
-});
-*/
+  app.use((error, req, res, next) => {
+    res.status(error.status === 413 ? 413 : 400).render('error', {
+      title: 'Request could not be read', message: 'Please use the form and keep the input within its limits.'
+    });
+  });
+  return app;
+}
 
+if (require.main === module) {
+  try {
+    if (!process.env.HUBSPOT_CUSTOM_OBJECT_TYPE) throw new Error('Custom object ID is not configured.');
+    const hubspot = new HubSpotClient({ token: process.env.HUBSPOT_ACCESS_TOKEN, objectType: process.env.HUBSPOT_CUSTOM_OBJECT_TYPE });
+    const port = Number(process.env.PORT || 3000);
+    if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid local port.');
+    createApp({ hubspot }).listen(port, '127.0.0.1', () => console.log(`Listening on http://127.0.0.1:${port}`));
+  } catch {
+    console.error('Configure the ignored local .env and run the isolated practicum setup before starting the app.');
+    process.exitCode = 1;
+  }
+}
 
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+module.exports = { createApp, validateKit };

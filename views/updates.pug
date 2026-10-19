@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  section.intro.compact
+    a.back(href='/') ← Return to homepage
+    p.eyebrow KIT WORKSHOP
+    h1 Add a Trail Kit
+    p.subtitle Give the kit a name, choose its category, and set its capacity.
+  section.card.form-card
+    if error
+      .error(role='alert')= error
+    form(action='/update-cobj' method='post')
+      label(for='name') Name
+      input#name(type='text' name='name' required maxlength='120' value=values.name autocomplete='off')
+      label(for='category') Category
+      input#category(type='text' name='category' required maxlength='60' value=values.category autocomplete='off')
+      label(for='capacity') Capacity
+      p.hint#capacity-help Whole number from 1 to 100
+      input#capacity(type='number' name='capacity' required min='1' max='100' step='1' value=values.capacity aria-describedby='capacity-help')
+      button.button(type='submit') Add kit
