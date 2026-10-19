@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  section.intro
+    p.eyebrow FIELD NOTES / KIT INVENTORY
+    h1 A little preparation. A better adventure.
+    p.subtitle Browse the practice Trail Kits and add a new kit to the collection.
+    a.button(href='/update-cobj') Add to this table
+  section.card(aria-labelledby='inventory-heading')
+    .card-heading
+      h2#inventory-heading Trail Kits
+      span.count #{data.length} #{data.length === 1 ? 'kit' : 'kits'}
+    .table-wrap
+      table
+        caption.sr-only All custom Trail Kit properties: Name, Category, and Capacity
+        thead
+          tr
+            th(scope='col') Name
+            th(scope='col') Category
+            th.numeric(scope='col') Capacity
+        tbody
+          each record in data
+            tr
+              td= record.properties.name
+              td= record.properties.category
+              td.numeric= record.properties.capacity
+          else
+            tr
+              td.empty(colspan='3') No kits yet. Add the first one to get started.

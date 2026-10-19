@@ -1,58 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    margin: 1rem;
-}
-
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-.card__email {
-    font-size: 1rem;
-}
-
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
-}
-
-input[type="text"] {
-    padding: .25rem;
-}
-
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
-}
+:root { color-scheme: light; --ink: #173a35; --muted: #5a706b; --line: #dce4dc; --paper: #f3f5ec; --green: #215c49; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 system-ui, sans-serif; }
+.container { max-width: 1050px; margin: auto; padding: 30px 32px; }
+.brand, .card-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.wordmark { color: var(--ink); text-decoration: none; font-size: 20px; font-weight: 750; letter-spacing: -.7px; }
+.badge, .count { border: 1px solid #cbd7c8; border-radius: 30px; padding: 5px 12px; font-size: 12px; white-space: nowrap; }
+.intro { padding: 64px 0 36px; max-width: 770px; }
+.eyebrow { font-size: 11px; font-weight: 750; letter-spacing: 2px; color: var(--muted); }
+h1 { font-family: Georgia, serif; font-weight: 500; font-size: clamp(34px, 5vw, 56px); line-height: 1.1; letter-spacing: -1.6px; margin: 16px 0; }
+.subtitle { color: var(--muted); max-width: 610px; margin-bottom: 26px; }
+.button { display: inline-block; border: 0; border-radius: 7px; padding: 12px 20px; background: var(--green); color: white; font: inherit; font-weight: 650; text-decoration: none; cursor: pointer; }
+.button:hover { background: #164935; }
+a:focus-visible, input:focus-visible, button:focus-visible { outline: 3px solid #c88d32; outline-offset: 4px; }
+.card { border: 1px solid var(--line); background: #fffef9; border-radius: 12px; overflow: hidden; }
+.card-heading { padding: 17px 25px; border-bottom: 1px solid var(--line); }
+h2 { font-size: 18px; margin: 0; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 17px 25px; border-bottom: 1px solid #e8ece3; }
+th { background: #edf1e7; font-size: 12px; font-weight: 650; color: var(--muted); }
+tbody tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 650; }
+.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.empty { text-align: center; color: var(--muted); }
+.compact { padding-top: 36px; }
+.back { color: var(--green); font-size: 14px; }
+.form-card { max-width: 670px; padding: 30px; }
+label { display: block; margin: 0 0 6px; font-weight: 650; }
+input { width: 100%; font: inherit; background: white; border: 1px solid #b9c8bb; border-radius: 5px; padding: 10px 12px; margin-bottom: 24px; }
+input[type=number] { max-width: 180px; display: block; }
+.hint { margin: -2px 0 7px; color: var(--muted); font-size: 13px; }
+.error { border-left: 4px solid #a83826; background: #fff0e9; padding: 13px 16px; margin-bottom: 24px; color: #722a1e; }
+footer { margin-top: 45px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+@media (max-width: 600px) { .container { padding: 20px; } .brand { align-items: flex-start; flex-direction: column; } .intro { padding-top: 36px; } th, td { padding: 14px 16px; } .form-card { padding: 22px; } }
